@@ -141,7 +141,7 @@ def getAreasByTaxon(cd_ref):
             ),
         )
         .join(VmBibAreasTypes, VmAreas.id_type == VmBibAreasTypes.id_type)
-        .filter(VmBibAreasTypes.type_code == func.any(array(param["list_id_type"])))
+        .filter(VmBibAreasTypes.type_code.in_(param["list_id_type"]))
         .order_by(VmBibAreasTypes.type_name.asc(), VmAreas.area_name.asc())
         .all()
     )
